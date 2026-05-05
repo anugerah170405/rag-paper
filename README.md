@@ -4,10 +4,10 @@ Backend & Frontend, backend menggunakan python dan frontend menggunakan react + 
 
 ## Anggota Kelompok 1
 
-1. Londok, Stieven Joshua
-2. Loing, Rayden Vigo Avogadro
-3. Hongjoyo, Zacklee Johanes
-4. Sthaford Beim Mamahit
+1. Sthaford Beim Mamahit (Ketua)
+2. Londok, Stieven Joshua
+3. Loing, Rayden Vigo Avogadro
+4. Hongjoyo, Zacklee Johanes
 5. Gari, Anugerah
 
 ## Link Reels
