@@ -4,7 +4,7 @@ Backend & Frontend, backend menggunakan python dan frontend menggunakan react + 
 
 ## Anggota Kelompok 1
 
-1. Sthaford Beim Mamahit (Ketua)
+1. Mamahit, Sthaford Beim (Ketua)
 2. Londok, Stieven Joshua
 3. Loing, Rayden Vigo Avogadro
 4. Hongjoyo, Zacklee Johanes
