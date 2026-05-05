@@ -5,40 +5,39 @@ from urllib import request as urlrequest
 from ..config import settings
 
 
+import httpx
+
 def call_gemini(prompt: str) -> str:
     settings.reload()
     if not settings.gemini_api_key:
         raise RuntimeError("GEMINI_API_KEY belum diisi di file .env")
 
-    url = (
-        f"{settings.gemini_base_url}/models/{settings.gemini_chat_model}:generateContent"
-        f"?key={settings.gemini_api_key}"
-    )
+    url = f"{settings.gemini_base_url}/chat/completions"
     payload = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.2, "maxOutputTokens": 900},
+        "model": settings.gemini_chat_model,
+        "messages": [{"role": "user", "content": prompt}],
+        "temperature": 0.2,
+        "max_tokens": 900,
     }
-    data = json.dumps(payload).encode("utf-8")
-    req = urlrequest.Request(
-        url,
-        data=data,
-        headers={"Content-Type": "application/json"},
-        method="POST",
-    )
 
     try:
-        with urlrequest.urlopen(req, timeout=settings.gemini_timeout_seconds) as response:
-            body = json.loads(response.read().decode("utf-8"))
-    except urlerror.HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"Gemini HTTP error {exc.code}: {detail}") from exc
+        with httpx.Client(timeout=settings.gemini_timeout_seconds) as client:
+            response = client.post(
+                url,
+                json=payload,
+                headers={"Authorization": f"Bearer {settings.gemini_api_key}"},
+            )
+            response.raise_for_status()
+            body = response.json()
+    except httpx.HTTPStatusError as exc:
+        raise RuntimeError(f"Groq HTTP error {exc.response.status_code}: {exc.response.text}") from exc
     except Exception as exc:
-        raise RuntimeError(f"Gemini request failed: {exc}") from exc
+        raise RuntimeError(f"Groq request failed: {exc}") from exc
 
     try:
-        return body["candidates"][0]["content"]["parts"][0]["text"].strip()
+        return body["choices"][0]["message"]["content"].strip()
     except Exception as exc:
-        raise RuntimeError(f"Gemini response tidak sesuai: {body}") from exc
+        raise RuntimeError(f"Groq response tidak sesuai: {body}") from exc
 
 
 def fallback_answer(context: str, task: str, reason: str | None = None) -> str:

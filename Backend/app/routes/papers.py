@@ -493,6 +493,49 @@ def delete_paper(paper_id: int, user: UserOut = Depends(current_user)):
     return {"status": "deleted", "paper_id": paper_id}
 
 
+@router.post("/{paper_id}/sections/{section_type}/clean")
+def clean_section(
+    paper_id: int,
+    section_type: str,
+    user: UserOut = Depends(current_user),
+):
+    valid_sections = {"abstract", "methodology", "results", "conclusion", "overview"}
+    if section_type not in valid_sections:
+        raise HTTPException(status_code=400, detail=f"Section '{section_type}' tidak valid")
+
+    with get_conn() as conn:
+        cur = conn.cursor()
+        get_paper_or_404(cur, paper_id, user.id)
+        cur.execute(
+            "SELECT content FROM rag_sections WHERE paper_id = ? AND section_type = ?",
+            (paper_id, section_type),
+        )
+        row = cur.fetchone()
+
+    if not row or not row[0]:
+        raise HTTPException(status_code=404, detail=f"Section '{section_type}' tidak ditemukan di paper ini")
+
+    content = text_value(row[0])
+    prompt = (
+        "Kamu adalah asisten akademik. Jawab dalam bahasa Indonesia.\n"
+        f"Bersihkan dan perbaiki teks section '{section_type}' berikut dari sebuah paper akademik. "
+        "Perbaiki spasi, formatting, dan karakter aneh akibat ekstraksi PDF. "
+        "Pertahankan makna asli tanpa menambah atau mengurangi informasi.\n\n"
+        f"{content}"
+    )
+
+    try:
+        cleaned = call_gemini(prompt)
+    except RuntimeError as exc:
+        cleaned = fallback_answer(content, f"isi section {section_type}", str(exc))
+
+    return {
+        "paper_id": paper_id,
+        "section_type": section_type,
+        "cleaned": cleaned,
+    }
+
+
 @router.get("/{paper_id}/sections/{section_type}")
 def get_section(paper_id: int, section_type: str, user: UserOut = Depends(current_user)):
     with get_conn() as conn:
