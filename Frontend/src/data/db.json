@@ -1,0 +1,45 @@
+{
+  "responses": [
+    {
+      "keywords": ["transformer", "transformers"],
+      "reply": "Transformer models use self-attention mechanisms to process entire sequences in parallel, unlike RNNs. This makes them significantly faster to train and better at capturing long-range dependencies in text."
+    },
+    {
+      "keywords": ["nlp", "natural language"],
+      "reply": "NLP (Natural Language Processing) is a field of AI focused on enabling machines to understand and generate human language. Modern NLP is dominated by large pretrained models like BERT and GPT."
+    },
+    {
+      "keywords": ["bert"],
+      "reply": "BERT (Bidirectional Encoder Representations from Transformers) is a pretrained model by Google that reads text bidirectionally. It revolutionized NLP tasks like classification, NER, and question answering."
+    },
+    {
+      "keywords": ["gpt"],
+      "reply": "GPT (Generative Pretrained Transformer) is an autoregressive language model by OpenAI. It generates text by predicting the next token, and has scaled to billions of parameters."
+    },
+    {
+      "keywords": ["methodology", "method"],
+      "reply": "The paper's methodology involves a systematic literature review of deep learning approaches in NLP from 2015–2023, categorizing models by architecture type and benchmark performance."
+    },
+    {
+      "keywords": ["result", "results", "finding", "findings"],
+      "reply": "Key findings show that transformer-based models consistently outperform RNN and CNN-based architectures across all major NLP benchmarks, with BERT achieving state-of-the-art on GLUE."
+    },
+    {
+      "keywords": ["conclusion"],
+      "reply": "The paper concludes that while transformers dominate NLP, open challenges remain: low-resource languages, computational cost, and model interpretability need further research."
+    },
+    {
+      "keywords": ["summary", "summarize", "tldr"],
+      "reply": "In short: this survey traces NLP from statistical methods to transformers, shows transformers win across the board, but flags efficiency and multilingual support as unsolved problems."
+    },
+    {
+      "keywords": ["author", "authors", "who wrote", "written by"],
+      "reply": "This paper was written by Zhang, L., Wang, S., and Liu, B., published in the Journal of Machine Learning Research in 2023."
+    },
+    {
+      "keywords": ["citation", "cited", "impact"],
+      "reply": "This paper has 124 citations, indicating strong impact in the NLP research community since its publication in May 2023."
+    }
+  ],
+  "fallback": "That's an interesting question about this paper. I don't have a specific answer for that yet — try asking about the methodology, results, transformers, BERT, or the authors."
+}

@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/* =========================
+   DESIGN TOKENS (LIGHT)
+========================= */
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #ffffff;
+  --bg-alt: #F9F9FA;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+
+  --accent: #155DFC;
+  --accent-bg: #c0d6ff27;
+  --accent-border: rgba(59, 62, 255, 0.5);
+
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  font: 18px/145% var(--sans);
+
+  color: var(--text);
+  background: var(--bg);
+
+  letter-spacing: 0.18px;
+  -webkit-font-smoothing: antialiased;
+
+  /* ── Bridge ke Tailwind semantic ── */
+  --color-background: var(--bg);
+  --color-foreground: var(--text-h);
+  --color-muted: var(--bg-alt);
+  --color-muted-foreground: var(--text);
+  --color-border: var(--border);
+  --color-card: var(--bg);
+  --color-primary: var(--accent);
+  --color-primary-foreground: #ffffff;
+  --color-accent: var(--bg-alt);
+  --color-accent-foreground: var(--text-h);
+}
+
+/* =========================
+   MANUAL DARK OVERRIDE
+========================= */
+.dark {
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
+  --bg: #090909;
+  --border: #1b1b1b;
+  --code-bg: #1f2028;
+  --bg-alt: #131313;
+
+  --accent: #849afc;
+  --accent-bg: rgba(140, 132, 252, 0.15);
+  --accent-border: rgba(132, 132, 252, 0.5);
+
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
+    rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+  /* ── Bridge dark ── */
+  --color-background: var(--bg);
+  --color-foreground: var(--text-h);
+  --color-muted: var(--bg-alt);
+  --color-muted-foreground: var(--text);
+  --color-border: var(--border);
+  --color-card: #0f0f0f;
+  --color-primary: var(--accent);
+  --color-primary-foreground: #0a0a0a;
+  --color-accent: #1a1a1a;
+  --color-accent-foreground: var(--text-h);
+}
+
+/* =========================
+   UTILITY CLASSES (tetap ada buat compatibility)
+========================= */
+.bg-base       { background: var(--bg); }
+.text-base     { color: var(--text); }
+.text-heading  { color: var(--text-h); }
+.border-base   { border-color: var(--border); }
+.bg-accent-custom { background: var(--accent); }
+.text-accent   { color: var(--accent); }
+
+/* =========================
+   GLOBAL STYLE
+========================= */
+body { margin: 0; }
+
+#root {
+  max-width: 100%;
+  min-height: 100svh;
+}
+
+h1, h2 {
+  color: var(--text-h);
+  font-weight: 500;
+}
+
+code {
+  background: var(--code-bg);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* Sidebar hover states */
+.sidebar-btn:hover {
+  background: var(--border) !important;
+}
+.sidebar-btn-primary:hover {
+  background: var(--accent-bg) !important;
+}
+.sidebar-btn-active {
+  background: var(--accent-bg) !important;
+}
+.sidebar-icon-btn:hover {
+  background: var(--border) !important;
+}
+
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-5px); }
+}
