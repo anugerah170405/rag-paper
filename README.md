@@ -2,7 +2,7 @@
 
 Backend & Frontend, backend menggunakan python dan frontend menggunakan react + tailwind
 
-## Nama Kelompok
+## Anggota Kelompok 1
 
 1. Londok, Stieven Joshua
 2. Loing, Rayden Vigo Avogadro
